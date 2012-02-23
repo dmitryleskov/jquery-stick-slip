@@ -1,0 +1,560 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Stick-Slip Demo</title>
+    <style type="text/css">
+      body {
+        background-color: #ddd;
+        font-size: 100%;
+        font-family: Georgia,"Times New Roman",Times,serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      div {
+        display: none;
+        position: relative;
+        border: 0 solid;
+        text-align: center;
+        overflow: hidden; 
+      }
+
+      p {
+        line-height: 1.5em;
+        margin: 0 0 1.5em 0;
+      }
+
+
+      #page-width {
+        position: relative;
+        background-color: #fff;
+        border-width: 0 2px;
+        width: 0px;
+        margin: 0 auto;
+        color: #ddd;
+      }
+       
+      .id {
+        display: block;
+        position: absolute;
+        top: 50%;
+        margin-top: -0.5em;
+        width: 100%;
+        text-align: center;
+        font: bold 200% sans-serif;
+        text-shadow: 1px 1px 1px #fff;
+        line-height: 1em;
+      }     
+
+      .class {
+        display: block;
+        position: absolute;
+        bottom: -0.5em;
+        right: 5%;
+        text-align: center;
+        font: bold 75% sans-serif;
+        line-height: 1em;
+      }     
+
+
+      #header {
+        color: #aab;
+        background-color: #ccd;
+        border-color: #bbc;
+        border-width: 0 0 2px 0;
+      }
+
+      #footer {
+        clear: both;
+        color: #aba;
+        background-color: #cdc;
+        border-color: #bcb;
+        border-width: 2px 0 0 0;
+      }
+
+      #page {
+        border-width: 0;
+        background-color: #fff;
+/*        overflow: hidden;*/
+      }
+
+      #content {
+        float: left;
+        color: #baa;
+        background-color: #dcc;
+        border-color: #cbb;
+        border-width: 0 1px 0 0;
+      }
+
+      #sidebar {
+        float: right;
+        color: #bba;
+        background-color: #ddc;
+        border-color: #ccb;
+        border-width: 0 0 0 1px;
+      }
+
+      #title {
+        position: absolute;
+        top: 50%;
+        margin-top: -0.5em;
+        width: 100%;
+        text-align: center;
+        color: #000;
+        font: bold 200% sans-serif;
+        text-shadow: 1px 1px 1px #fff;
+        line-height: 1em;
+      }     
+
+
+      h1 {
+        font-family: sans-serif;
+        font-size: 150%;
+      }
+
+      h2 {
+        font-family: sans-serif;
+        font-size: 125%;
+      }
+
+      #toc {
+        background-color: #f8f;
+        border: 2px solid #848;
+        margin: 10px;
+        padding: 10px;
+        box-shadow: 7px 7px 5px rgba(136,68,136,0.5);
+      }
+
+      #toc p {
+        color: #880;
+        font-family: sans-serif;
+        text-align: left;
+      }
+
+
+
+      .block-body {
+        color: #000;
+        background-color: #dee;
+        margin: 0em 1em 2em 150px;
+        padding: 1em 10px;
+        border: 1px dotted #899;
+        text-align: left;
+        overflow: visible; /* WebKit margin bug when float meets overflow:hidden */
+      }
+
+      .block-header {
+        clear: both;
+        text-align: left;
+        margin: 1em 10px 0.5em 160px;
+        color: #000;
+      }
+
+      .block-meta {
+        clear: left;
+        float: left;
+        border: 1px solid #cc6;
+        background-color: #ff8;
+        box-shadow: 5px 5px 5px #884;
+        color: #000;
+        width: 100px;
+        height: 5em;
+        margin-left: 10px;
+        padding: 10px;
+        font-size: 75%;
+      }
+
+      .block-meta-wrapper {
+        clear: left;
+        float: left;
+        border: 1px dotted #ccb;
+        background-color: #ffe;
+        color: #000;
+        width: 122px; 
+        margin-left: 10px;
+        padding: 0;
+        overflow: visible;
+      }
+
+      .obstacle {
+        position: absolute;
+        width: 180px;
+        height: 20px;
+        background-color: #c00;
+        border: 2px solid #800;
+        color: #fff;
+      }
+
+      .loremipsum {
+        color: #abb;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="page-width">
+      <div id="header">
+        <div id="title" class="title">
+          Stick-Slip jQuery Plugin Demo and Manual
+        </div>
+      </div>
+      <div id="page">
+        <div id="content">
+          <p align="right">
+            <i>The stick-slip phenomenon, also known as the slip-stick 
+            phenomenon or simply stick-slip, is the spontaneous jerking 
+            motion that can occur while two objects are sliding over each other.
+            </i>
+          </p>
+          <p align="right">
+            From Wikipedia, the free encyclopedia
+          </p>
+          <div class="block">
+            <div class="block-header" id="block-header-0">
+              <h1>When It Sticks, It Sticks</h1>
+<pre><code>    &lt;script type="text/javascript" src="jquery-1.6.1.min.js">&lt;/script&gt;
+    &lt;script type="text/javascript" src="jquery.stickers.min.js">&lt;/script&gt;
+    &lt;script type="text/javascript" &gt;
+      <i>sticker</i>.stick(<i>base</i>)
+    &lt;/script&gt;
+</code></pre>
+             <p>
+               where <code><i>sticker</i></code> is a jQuery object specifying 
+               the sticker element, and <code><i>base</i></code> is a jQuery 
+               object specifying its base element.
+             </p>
+              <p>
+                A sticker element &ldquo;sticks&rdquo; to the screen when 
+                the top edge of its <em>margin</em> reaches the top of the viewport 
+                as you scroll down the page, and remains there until its 
+                the bottom edge of its margin is aligned with the bottom edge 
+                of its <em>base element's</em> margin.
+              </p>
+              <p>
+                Typically, a sticker would float alongside its base.
+              </p>
+              <div id="sticker" style="float:left; width: 200px; height: 50px; display: block; border: 1px dotted black">
+                #sticker
+              </div>
+              <div id="base" style="margin-left: 210px; height: 200px; display: block; border: 1px dotted black">
+                #base
+              </div>
+
+              <p>
+                Assuming for simplicity that the top margin of 
+                the base element is zero, here is how you can control 
+                the behavior of the sticker by varying its margin:
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-1">
+              <h2>Sticker Also Has No Top Margin</h2>
+            </div>
+            <div class="block-meta" id="block-meta-1">
+              margin-top: 0
+            </div>
+            <div class="block-body" id="block-body-1">
+              <p>
+                The sticker starts slipping upon its top border hitting the viewport
+                boundary and slips until its bottom border is aligned with the bottom
+                border of the base element.
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-2">
+              <h2>Sticker Has Positive Top Margin</h2>
+            </div>
+            <div class="block-meta" id="block-meta-2" style="margin-top: 3.987em">
+              margin-top: 50px
+            </div>
+            <div class="block-body" id="block-body-2">
+              <p>
+                The sticker keeps distance equal to its top margin from
+                the top of the viewport.
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-3">
+              <h2>Sticker Has Negative Top Margin</h2>
+            </div>
+            <div class="block-meta" id="block-meta-3" style="margin-top: -20px">
+              margin-top: -20px
+            </div>
+            <div class="block-body" id="block-body-3">
+              <p>
+                The sticker is (partially) cropped by the viewport when stuck.
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-4">
+              <h1>Padded Wrappers To The Rescue</h1>
+              <p>
+                What if the above stick-slip rule does not suit you?
+                I could have enriching the plugin API with parameters,
+                but decided to rely on the CSS properties of the sticker 
+                element instead:
+              </p>
+            </div>
+            <div class="block-meta-wrapper" id="block-meta-4" style="padding-top: 60px; margin-top: -20px">
+              <div class="block-meta" style="float: none; margin-left: 0; text-align: left">
+                wrapper {<br>&nbsp;&nbsp;padding-top: 60px;<br>&nbsp;&nbsp;margin-top: -20px<br>}
+              </div>
+            </div>
+            <div class="block-body" id="block-body-4">
+              When you need the sticker to start slipping before reaching the top
+              of the viewport, yet slip below the bottom edge of the base, wrap
+              it into a <code>&lt;div&gt;</code> with negative top margin
+              and positive top padding exceeding that margin.
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-meta-wrapper" id="block-meta-5" style="padding-bottom: 60px; margin-top: 20px">
+              <div class="block-meta" style="float: none; margin-left: 0; text-align: left">
+                wrapper {<br>&nbsp;&nbsp;padding-bottom: 60px;<br>&nbsp;&nbsp;margin-top: 20px<br>}
+              </div>
+            </div>
+            <div class="block-body" id="block-body-5">
+              <p>
+                When you need the sticker to start slipping before reaching the top
+                of the viewport, yet slip below the bottom edge of the base, wrap
+                it into a <code>&lt;div&gt;</code> with negative top margin
+                and positive top padding exceeding that margin.
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-6">
+              <h1>You Are Responsible For Clearing The Space</h1>
+            </div>
+            <div class="block-meta" id="block-meta-66">Get out of my way!
+            </div>
+            <div class="block-meta" id="block-meta-6">Get out of my way!
+            </div>
+            <div class="block-body" id="block-body-6">
+              <div>
+                If there are any other elements in the slip area, 
+                they will obscure or be obsured by the sticker. Make sure to clear
+                that area or use z-index appropriately.
+              </div>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header">
+              <h1>This Is A Filler</h1>
+            </div>
+            <div class="block-meta">I won't slip!
+            </div>
+            <div class="block-body" id="filler">
+              <p>
+                This is a dummy block inserted to ensure that the stick-slip
+                effect can be observed on the previous block
+              </p>
+            </div>
+          </div>
+        </div>
+        <div id="sidebar">
+          <div id="toc" class="toc">
+          </div>
+        </div>
+      </div>
+      <div id="footer">
+      </div>
+    </div>
+    <script type="text/javascript" src="jquery-1.6.1.min.js"></script>
+    <script type="text/javascript" src="jquery.color.js"></script>
+    <script type="text/javascript" src="jquery.stickers.min.js"></script>
+    <script type="text/javascript">
+      <!--
+        $(document).ready(function() {
+
+          window.onerror = 
+            function(errorMessage, fileName, lineNumber) {
+              console.log(errorMessage+" "+fileName+" "+lineNumber)
+              $("body")
+                .css("border","10px solid red")
+                .append(
+                     $("<div>"+errorMessage+" "+fileName+" "+lineNumber+"</div>")
+                       .css({
+                         'display': 'block',
+                         'position': 'fixed',
+                         'top' : 0,
+                         'left': 0
+                       })      
+                )
+            }
+
+          var loremIpsum = "<p class='loremipsum'>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>"
+          var animationSpeed = 200
+          var viewportHeight = $(window).height()
+          var pageHeight = viewportHeight-204
+          var state = 0
+
+          $("[id]").filter(":not([class])").each(function () {
+            $this = $(this)
+            $this.prepend('<div class="id">#'+$this.attr('id')+'</div>')
+          })
+
+          function animate() {
+            var self = arguments.callee
+            switch (state++) {
+            case 0:
+              $("#page-width")
+                .css({height: viewportHeight+"px"})
+                .fadeIn()
+                .animate({width: "956px"}
+                  ,animationSpeed
+                  ,self)
+              break
+            case 1:
+              $("#header")
+                .css({top: "-100px", height: "100px"})
+                .show()
+                .animate({top: 0}
+                  ,animationSpeed
+                  ,self)
+              break
+            case 2:
+              $("#footer")
+                .css({height: "100px"})
+                .slideDown(animationSpeed
+                  ,self)
+              break
+            case 3:
+              $("#page")
+                .show()
+                .animate({height: pageHeight+"px"}
+                  ,animationSpeed
+                  ,self)
+              break
+            case 4:
+              $("#content")
+                .height(pageHeight)
+                .show()
+                .animate({width: "717px"}
+                  ,animationSpeed
+                  ,self)
+              break
+            case 5:
+              $("#sidebar")
+                .height(pageHeight)
+                .show()
+                .animate({width: "237px"}
+                  ,animationSpeed
+                  ,self)
+              break
+            case 6:
+              $(".id")
+                .fadeOut()
+              $("#header, #footer, #content, #sidebar")
+                .animate({
+                  backgroundColor: '#fff',
+                  borderLeftColor: '#eee',
+                  borderRightColor: '#eee',
+                  borderTopColor: '#eee',
+                  borderBottomColor: '#eee',
+                  color: '#eee'
+                }, animationSpeed).last().queue(function() {
+                  self()
+                  $(this).dequeue()
+                })
+                break
+            case 7:
+              $("#title")
+                .fadeIn()
+              $(".block-header")
+                .show()
+              $(".block-body").filter("[id]")
+                .append(loremIpsum)
+                .append(loremIpsum)
+              $(".block-body")
+                .show()
+              $(".block-meta-wrapper")
+                .show()
+              $(".block")
+                .slideDown(animationSpeed)
+
+              $("#test").fadeIn()
+
+              $(".block-meta")
+                .fadeIn()
+                .last().queue(function() {
+                  self()
+                  $(this).dequeue()
+                })
+              break
+            case 8:
+              var start = $("#block-body-6").offset().top-$("#sidebar").offset().top
+              var stop  = start+$("#block-body-6").outerHeight()-20
+              for (t = start; t < stop; t+=80) {
+                $("<div class='obscured obstacle'>Obscured</div>")
+                  .insertBefore("#toc")
+                  .css({
+                    top: t,
+                    left: 5,
+                    backgroundColor: '#800',
+                    'box-shadow' : "3px 3px 5px rgba(136,68,68,0.5)"
+                  })
+                  .show()
+                $("<div class='obstacle'>Obscures</div>")
+                  .insertAfter("#toc")
+                  .css({
+                    top: t+40, 
+                    right: 5, 
+                    'box-shadow' : "10px 10px 5px rgba(136,68,68,0.5)"
+                  })
+                  .show()
+              }
+              $(window).bind('scroll hashchange', $(".obstacle"), function(event) {
+                event.data.each(function() {
+                  var factor = ($(this).offset().top - $(window).scrollTop() - $(window).height()*0.25) / ($(window).height()*0.5);
+                  if (factor < 0) factor = 0
+                  else if (factor > 1) factor = 1
+                  if ($(this).hasClass('obscured'))
+                    $(this).css('left', 5-$(this).outerWidth()*factor)
+                  else
+                    $(this).css('right', 5-$(this).outerWidth()*factor)
+                });
+              });
+              $("#filler").show()
+              while ($("#filler").height() < viewportHeight) {
+                $("#filler").append("<p class='loremipsum'>"+loremIpsum+"</p>")
+              }
+              $("h1").each(function() {
+                $("#toc").append("<p><a href='#"+$(this).parent().attr('id')+"'>"+$(this).text()+"</a></p>")
+              })
+              $("#toc").fadeIn(self)
+              break
+            case 9:
+              var contentHeight = 
+                $("#content > div:last-child").position().top+
+                $("#content > div:last-child").outerHeight()
+              $("#page-width").css("height","auto")
+              $("#content, #sidebar")
+                .css("height",contentHeight)
+              $("#page")
+                .animate({"height": contentHeight+"px"}
+                  ,self)
+              break
+            default:
+              $("#sticker").stick($("#base"))
+              $("#block-meta-0").stick($("#block-body-0")) 
+              $("#block-meta-1").stick($("#block-body-1")) 
+              $("#block-meta-2").stick($("#block-body-2")) 
+              $("#block-meta-3").stick($("#block-body-3")) 
+              $("#block-meta-4").stick($("#block-body-4")) 
+              $("#block-meta-5").stick($("#block-body-5")) 
+              $("#block-meta-6").stick($("#block-body-6")) 
+              $("#toc").stick($("#content"))
+              return;
+            }
+          }
+          animate()
+        })
+      //-->
+    </script>
+  </body>
+</html>
