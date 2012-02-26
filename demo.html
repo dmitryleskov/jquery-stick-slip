@@ -129,9 +129,20 @@
         color: #880;
         font-family: sans-serif;
         text-align: left;
+        margin-bottom: 1em;
       }
 
+      #toc p:last-child {
+        margin-bottom: 0;
+      }
 
+      .spaceafter {
+        margin-bottom: 1.5em;
+      }
+
+      .nospaceafter {
+        margin-bottom: 0;
+      }
 
       .block-body {
         color: #000;
@@ -207,7 +218,7 @@
             </i>
           </p>
           <p align="right">
-            From Wikipedia, the free encyclopedia
+            &mdash; From Wikipedia, the free encyclopedia
           </p>
           <div class="block">
             <div class="block-header" id="block-header-0">
@@ -231,15 +242,107 @@
                 of its <em>base element's</em> margin.
               </p>
               <p>
-                Typically, a sticker would float alongside its base.
+                Typically, a sticker would float either alongside its base:
               </p>
-              <div id="sticker" style="float:left; width: 200px; height: 50px; display: block; border: 1px dotted black">
-                #sticker
-              </div>
-              <div id="base" style="margin-left: 210px; height: 200px; display: block; border: 1px dotted black">
-                #base
-              </div>
+              <div class="spaceafter" style="display: block; position: relative">
+                <div style="display: block; position: absolute; width: 150px; height: 220px;">
+                  <div style="display: block; 
+                              position: absolute;
+                              top: 0;
+                              width: 100%;
+                              height: 10px; 
+                              background: red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              left: 5px;
+                              top: 10px;
+                              width: 0; 
+                              height: 0; 
+                              border-left: 30px solid transparent;
+                              border-right: 30px solid transparent;
+                              border-bottom: 60px solid red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              top: 70px;
+                              left: 15px;
+                              width: 40px; 
+                              height: 80px; 
+                              background: red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              right: 5px;
+                              top: 10px;
+                              width: 0; 
+                              height: 0; 
+                              border-left: 30px solid transparent;
+                              border-right: 30px solid transparent;
+                              border-bottom: 60px solid red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              left: 5px;
+                              bottom: 10px;
+                              width: 0; 
+                              height: 0; 
+                              border-left: 30px solid transparent;
+                              border-right: 30px solid transparent;
+                              border-top: 60px solid red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              top: 70px;
+                              right: 15px;
+                              width: 40px; 
+                              height: 80px; 
+                              background: red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              bottom: 10px;
+                              right: 5px;
+                              width: 0; 
+                              height: 0; 
+                              border-left: 30px solid transparent;
+                              border-right: 30px solid transparent;
+                              border-top: 60px solid red;"
+                  ></div>
+                  <div style="display: block; 
+                              position: absolute;
+                              bottom: 0;
+                              width: 100%;
+                              height: 10px; 
+                              background: red;"
+                  ></div>
+                </div>
 
+                <div class="sample-sticker" id="sticker1" style="float:left; display: block; margin-top: -10px; padding-top: 20px;">
+                  <div style="display: block; width: 148px; border: 1px dotted black; background: rgba(255,255,255,0.9);">
+                     float: left;<br>
+                     width: 150px;
+                  </div>
+                </div>
+                <div class="sample-base" id="base1" style="margin: 10px 0 10px 160px; height: 200px; display: block; border: 1px dotted black">
+                  margin-left: 160px;
+                </div>
+              </div>
+              <p>
+                or across the page content, e.g. main menu bar placed below some graphic.
+                (In the latter case, you must ensure that other elements do not change 
+                positions when the sticker element is removed from normal flow.)
+              </p>
+              <div class="spaceafter" style="display: block">
+                <div class="sample-sticker" id="sticker2" style="float: left; width: 100%; display: block; padding-right: 2px; margin-bottom: -52px;">
+                  <div style="height: 50px; display: block; border: 1px dotted red; background: rgba(255,255,255,0.9); z-index: 1">
+                    float: left; width: 100%; height: 50px;
+                  </div>
+                </div>
+                <div class="sample-base" id="base2" style="height: 200px; display: block; position: relative; top: 60px; margin-bottom: 60px; border: 1px dotted black">
+                  position: relative; top: 60px; margin-bottom: 60px;
+                </div>
+              </div>
               <p>
                 Assuming for simplicity that the top margin of 
                 the base element is zero, here is how you can control 
@@ -294,7 +397,7 @@
               <h1>Padded Wrappers To The Rescue</h1>
               <p>
                 What if the above stick-slip rule does not suit you?
-                I could have enriching the plugin API with parameters,
+                I could have enriched the plugin API with parameters,
                 but decided to rely on the CSS properties of the sticker 
                 element instead:
               </p>
@@ -305,10 +408,11 @@
               </div>
             </div>
             <div class="block-body" id="block-body-4">
-              When you need the sticker to start slipping before reaching the top
-              of the viewport, yet slip below the bottom edge of the base, wrap
-              it into a <code>&lt;div&gt;</code> with negative top margin
-              and positive top padding exceeding that margin.
+              <p>
+                When you need the sticker to start slipping before reaching the top
+                of the viewport, wrap it into a <code>&lt;div&gt;</code> with 
+                negative top margin and positive top padding exceeding that margin.
+              </p>
             </div>
           </div>
           <div class="block">
@@ -540,7 +644,8 @@
                   ,self)
               break
             default:
-              $("#sticker").stick($("#base"))
+              $("#sticker1").stick($("#base1"))
+              $("#sticker2").stick($("#base2"))
               $("#block-meta-0").stick($("#block-body-0")) 
               $("#block-meta-1").stick($("#block-body-1")) 
               $("#block-meta-2").stick($("#block-body-2")) 
