@@ -106,7 +106,6 @@ function log(s) {
         $(window).bind('scroll hashchange', stickers, function(event) {
             event.data.each(stick)
         });
-
         $(window).bind('resize', stickers, function(event) {
             DEBUG && log("re-stick")
             event.data.each(function() {

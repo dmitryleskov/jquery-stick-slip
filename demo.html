@@ -1,21 +1,19 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>Stick-Slip Demo</title>
+    <title>Stick-Slip JQuery Plugin Demo and Manual</title>
     <style type="text/css">
       body {
         background-color: #ddd;
         font-size: 100%;
-        font-family: Georgia,"Times New Roman",Times,serif;
+        font-family: Georgia, "Times New Roman", Times, serif;
         margin: 0;
         padding: 0;
       }
 
       div {
-        display: none;
         position: relative;
         border: 0 solid;
-        text-align: center;
         overflow: hidden; 
       }
 
@@ -24,14 +22,38 @@
         margin: 0 0 1.5em 0;
       }
 
+      pre {
+          overflow: auto;  /* This does not work in IE6-... */
+          text-align: left;
+          font-family: inherit; /* Otherwise it will default to the default monospace font size in FF */
+          display: block;
+          background-color: #fff;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 0.5em;
+          margin: 0 0 1.5em 0;
+      }
+
+      code {
+          font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace;  
+          font-size: 0.875em;
+          font-weight: bolder;
+          color: #666;
+      }
+
+      pre code {
+          font-weight: normal;
+          color: #444;
+      }
+
 
       #page-width {
         position: relative;
         background-color: #fff;
+        border-color: #ccc;
         border-width: 0 2px;
-        width: 0px;
+        width: 956px;
         margin: 0 auto;
-        color: #ddd;
       }
        
       .id {
@@ -56,19 +78,19 @@
         line-height: 1em;
       }     
 
+      #header, #footer, #content, #sidebar {
+        background-color: #fff;
+        border-color: #eee;
+      }
 
       #header {
-        color: #aab;
-        background-color: #ccd;
-        border-color: #bbc;
+        height: 8em;
         border-width: 0 0 2px 0;
       }
 
       #footer {
         clear: both;
-        color: #aba;
-        background-color: #cdc;
-        border-color: #bcb;
+        height: 6em;
         border-width: 2px 0 0 0;
       }
 
@@ -80,32 +102,36 @@
 
       #content {
         float: left;
-        color: #baa;
-        background-color: #dcc;
-        border-color: #cbb;
+        width: 717px;
         border-width: 0 1px 0 0;
       }
 
       #sidebar {
         float: right;
-        color: #bba;
-        background-color: #ddc;
-        border-color: #ccb;
+        width: 237px;
         border-width: 0 0 0 1px;
       }
 
       #title {
         position: absolute;
         top: 50%;
-        margin-top: -0.5em;
+        margin-top: -1em;
         width: 100%;
         text-align: center;
         color: #000;
         font: bold 200% sans-serif;
-        text-shadow: 1px 1px 1px #fff;
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.25);
         line-height: 1em;
       }     
 
+      #copyright {
+        position: absolute;
+        top: 50%;
+        margin-top: -0.5em;
+        width: 100%;
+        text-align: center;
+        line-height: 1em;
+      }     
 
       h1 {
         font-family: sans-serif;
@@ -146,7 +172,7 @@
 
       .block-body {
         color: #000;
-        background-color: #dee;
+        background-color: #eff;
         margin: 0em 1em 2em 150px;
         padding: 1em 10px;
         border: 1px dotted #899;
@@ -173,6 +199,7 @@
         margin-left: 10px;
         padding: 10px;
         font-size: 75%;
+        text-align: center; 
       }
 
       .block-meta-wrapper {
@@ -206,40 +233,43 @@
     <div id="page-width">
       <div id="header">
         <div id="title" class="title">
-          Stick-Slip jQuery Plugin Demo and Manual
+          Stick-Slip jQuery Plugin by <a href="http://www.dmitryleskov.com">Dmitry Leskov</a><br>
+          <small>2-in-1: Demo and Manual</small>
         </div>
       </div>
       <div id="page">
         <div id="content">
-          <p align="right">
-            <i>The stick-slip phenomenon, also known as the slip-stick 
-            phenomenon or simply stick-slip, is the spontaneous jerking 
-            motion that can occur while two objects are sliding over each other.
-            </i>
-          </p>
-          <p align="right">
-            &mdash; From Wikipedia, the free encyclopedia
-          </p>
           <div class="block">
             <div class="block-header" id="block-header-0">
-              <h1>When It Sticks, It Sticks</h1>
-<pre><code>    &lt;script type="text/javascript" src="jquery-1.6.1.min.js">&lt;/script&gt;
-    &lt;script type="text/javascript" src="jquery.stickers.min.js">&lt;/script&gt;
-    &lt;script type="text/javascript" &gt;
-      <i>sticker</i>.stick(<i>base</i>)
-    &lt;/script&gt;
+            <p align="right">
+              <i>The stick-slip phenomenon, also known as the slip-stick 
+              phenomenon or simply stick-slip, is the spontaneous jerking 
+              motion that can occur while two objects are sliding over each other.
+              </i>
+            </p>
+            <p align="right">
+              &mdash; From Wikipedia, the free encyclopedia
+            </p>
+            <h1>Usage</h1>
+<pre><code>&lt;script type="text/javascript" src="jquery-<i>version</i>.min.js">&lt;/script&gt;
+&lt;script type="text/javascript" src="jquery.stickers.min.js">&lt;/script&gt;
+&lt;script type="text/javascript" &gt;
+  <i>sticker</i>.stick(<i>base</i>)
+&lt;/script&gt;
 </code></pre>
              <p>
                where <code><i>sticker</i></code> is a jQuery object specifying 
                the sticker element, and <code><i>base</i></code> is a jQuery 
                object specifying its base element.
              </p>
+              <h1>When It Sticks, It Sticks</h1>
               <p>
                 A sticker element &ldquo;sticks&rdquo; to the screen when 
-                the top edge of its <em>margin</em> reaches the top of the viewport 
-                as you scroll down the page, and remains there until its 
-                the bottom edge of its margin is aligned with the bottom edge 
-                of its <em>base element's</em> margin.
+                the top edge of its <em>margin box</em> reaches the top of the viewport 
+                as the visitor scrolls down the page, remains there until 
+                the bottom edge of its <i>border box</i> is aligned with the bottom edge 
+                of its <em>base element's</em> border box, and then &ldquo;sticks&rdquo; 
+                back to the page.
               </p>
               <p>
                 Typically, a sticker would float either alongside its base:
@@ -352,14 +382,17 @@
           </div>
           <div class="block">
             <div class="block-header" id="block-header-1">
-              <h2>Sticker Also Has No Top Margin</h2>
+              <h2>Sticker Has No Top Margin</h2>
             </div>
             <div class="block-meta" id="block-meta-1">
-              margin-top: 0
+              #sticker1
             </div>
             <div class="block-body" id="block-body-1">
+<pre><code>#sticker1 {
+  margin-top: 0;
+}</code></pre>
               <p>
-                The sticker starts slipping upon its top border hitting the viewport
+                The sticker starts slipping upon its top <i>border</i> hitting the viewport
                 boundary and slips until its bottom border is aligned with the bottom
                 border of the base element.
               </p>
@@ -370,12 +403,16 @@
               <h2>Sticker Has Positive Top Margin</h2>
             </div>
             <div class="block-meta" id="block-meta-2" style="margin-top: 3.987em">
-              margin-top: 50px
+              #sticker2
             </div>
             <div class="block-body" id="block-body-2">
+<pre><code>#sticker2 {
+  margin-top: 50px;
+}</code></pre>
               <p>
                 The sticker keeps distance equal to its top margin from
-                the top of the viewport.
+                the top of the viewport until its bottom border is aligned 
+                with the bottom border of the base element.
               </p>
             </div>
           </div>
@@ -384,9 +421,12 @@
               <h2>Sticker Has Negative Top Margin</h2>
             </div>
             <div class="block-meta" id="block-meta-3" style="margin-top: -20px">
-              margin-top: -20px
+              #sticker3
             </div>
             <div class="block-body" id="block-body-3">
+<pre><code>#sticker3 {
+  margin-top: -20px;
+}</code></pre>
               <p>
                 The sticker is (partially) cropped by the viewport when stuck.
               </p>
@@ -403,30 +443,38 @@
               </p>
             </div>
             <div class="block-meta-wrapper" id="block-meta-4" style="padding-top: 60px; margin-top: -20px">
-              <div class="block-meta" style="float: none; margin-left: 0; text-align: left">
-                wrapper {<br>&nbsp;&nbsp;padding-top: 60px;<br>&nbsp;&nbsp;margin-top: -20px<br>}
+              <div class="block-meta" style="float: none; margin-left: 0;">
+                #sticker4
               </div>
             </div>
             <div class="block-body" id="block-body-4">
+<pre><code>#wrapper4 {
+  padding-top: 60px;
+  margin-top: -20px;
+}</code></pre>
               <p>
                 When you need the sticker to start slipping before reaching the top
                 of the viewport, wrap it into a <code>&lt;div&gt;</code> with 
-                negative top margin and positive top padding exceeding that margin.
+                negative top margin and positive top padding exceeding that margin,
+                and stick <i>that wrapper div</i> to the base.
               </p>
             </div>
           </div>
           <div class="block">
             <div class="block-meta-wrapper" id="block-meta-5" style="padding-bottom: 60px; margin-top: 20px">
-              <div class="block-meta" style="float: none; margin-left: 0; text-align: left">
-                wrapper {<br>&nbsp;&nbsp;padding-bottom: 60px;<br>&nbsp;&nbsp;margin-top: 20px<br>}
+              <div class="block-meta" style="float: none; margin-left: 0;">
+                #sticker5
               </div>
             </div>
             <div class="block-body" id="block-body-5">
+<pre><code>#wrapper5 {
+  padding-bottom: 60px;
+  margin-top: 20px;
+}</code></pre>
               <p>
-                When you need the sticker to start slipping before reaching the top
-                of the viewport, yet slip below the bottom edge of the base, wrap
-                it into a <code>&lt;div&gt;</code> with negative top margin
-                and positive top padding exceeding that margin.
+                Conversely, when you need the sticker to stop slipping before reaching 
+                the bottom edge of the base, wrap it into a 
+                <code>&lt;div&gt;</code> with positive bottom padding.
               </p>
             </div>
           </div>
@@ -434,16 +482,19 @@
             <div class="block-header" id="block-header-6">
               <h1>You Are Responsible For Clearing The Space</h1>
             </div>
-            <div class="block-meta" id="block-meta-66">Get out of my way!
+            <div class="block-meta" id="block-meta-6" style="z-index: 1">#sticker6
             </div>
-            <div class="block-meta" id="block-meta-6">Get out of my way!
+            <div class="block-meta" id="block-meta-66" style="margin-top: 120px;">Normally, I'd remain on top
             </div>
             <div class="block-body" id="block-body-6">
-              <div>
+<pre><code>#sticker6 {
+  z-index: 1;
+}</code></pre>
+              <p>
                 If there are any other elements in the slip area, 
                 they will obscure or be obsured by the sticker. Make sure to clear
                 that area or use z-index appropriately.
-              </div>
+              </p>
             </div>
           </div>
           <div class="block">
@@ -461,15 +512,19 @@
           </div>
         </div>
         <div id="sidebar">
-          <div id="toc" class="toc">
+          <div id="toc-wrapper">
+            <div id="toc" class="toc">
+            </div>
           </div>
         </div>
       </div>
       <div id="footer">
+        <div id="copyright">
+          Copyright &copy; 2011-2012 Dmitry Leskov.
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="jquery-1.6.1.min.js"></script>
-    <script type="text/javascript" src="jquery.color.js"></script>
     <script type="text/javascript" src="jquery.stickers.min.js"></script>
     <script type="text/javascript">
       <!--
@@ -495,169 +550,70 @@
           var animationSpeed = 200
           var viewportHeight = $(window).height()
           var pageHeight = viewportHeight-204
-          var state = 0
 
-          $("[id]").filter(":not([class])").each(function () {
-            $this = $(this)
-            $this.prepend('<div class="id">#'+$this.attr('id')+'</div>')
+          $(".block-body").filter("[id]")
+            .append(loremIpsum)
+
+          $("h1").each(function() {
+            $("#toc").append("<p><a href='#"+$(this).parent().attr('id')+"'>"+$(this).text()+"</a></p>")
           })
 
-          function animate() {
-            var self = arguments.callee
-            switch (state++) {
-            case 0:
-              $("#page-width")
-                .css({height: viewportHeight+"px"})
-                .fadeIn()
-                .animate({width: "956px"}
-                  ,animationSpeed
-                  ,self)
-              break
-            case 1:
-              $("#header")
-                .css({top: "-100px", height: "100px"})
-                .show()
-                .animate({top: 0}
-                  ,animationSpeed
-                  ,self)
-              break
-            case 2:
-              $("#footer")
-                .css({height: "100px"})
-                .slideDown(animationSpeed
-                  ,self)
-              break
-            case 3:
-              $("#page")
-                .show()
-                .animate({height: pageHeight+"px"}
-                  ,animationSpeed
-                  ,self)
-              break
-            case 4:
-              $("#content")
-                .height(pageHeight)
-                .show()
-                .animate({width: "717px"}
-                  ,animationSpeed
-                  ,self)
-              break
-            case 5:
-              $("#sidebar")
-                .height(pageHeight)
-                .show()
-                .animate({width: "237px"}
-                  ,animationSpeed
-                  ,self)
-              break
-            case 6:
-              $(".id")
-                .fadeOut()
-              $("#header, #footer, #content, #sidebar")
-                .animate({
-                  backgroundColor: '#fff',
-                  borderLeftColor: '#eee',
-                  borderRightColor: '#eee',
-                  borderTopColor: '#eee',
-                  borderBottomColor: '#eee',
-                  color: '#eee'
-                }, animationSpeed).last().queue(function() {
-                  self()
-                  $(this).dequeue()
-                })
-                break
-            case 7:
-              $("#title")
-                .fadeIn()
-              $(".block-header")
-                .show()
-              $(".block-body").filter("[id]")
-                .append(loremIpsum)
-                .append(loremIpsum)
-              $(".block-body")
-                .show()
-              $(".block-meta-wrapper")
-                .show()
-              $(".block")
-                .slideDown(animationSpeed)
-
-              $("#test").fadeIn()
-
-              $(".block-meta")
-                .fadeIn()
-                .last().queue(function() {
-                  self()
-                  $(this).dequeue()
-                })
-              break
-            case 8:
-              var start = $("#block-body-6").offset().top-$("#sidebar").offset().top
-              var stop  = start+$("#block-body-6").outerHeight()-20
-              for (t = start; t < stop; t+=80) {
-                $("<div class='obscured obstacle'>Obscured</div>")
-                  .insertBefore("#toc")
-                  .css({
-                    top: t,
-                    left: 5,
-                    backgroundColor: '#800',
-                    'box-shadow' : "3px 3px 5px rgba(136,68,68,0.5)"
-                  })
-                  .show()
-                $("<div class='obstacle'>Obscures</div>")
-                  .insertAfter("#toc")
-                  .css({
-                    top: t+40, 
-                    right: 5, 
-                    'box-shadow' : "10px 10px 5px rgba(136,68,68,0.5)"
-                  })
-                  .show()
-              }
-              $(window).bind('scroll hashchange', $(".obstacle"), function(event) {
-                event.data.each(function() {
-                  var factor = ($(this).offset().top - $(window).scrollTop() - $(window).height()*0.25) / ($(window).height()*0.5);
-                  if (factor < 0) factor = 0
-                  else if (factor > 1) factor = 1
-                  if ($(this).hasClass('obscured'))
-                    $(this).css('left', 5-$(this).outerWidth()*factor)
-                  else
-                    $(this).css('right', 5-$(this).outerWidth()*factor)
-                });
-              });
-              $("#filler").show()
-              while ($("#filler").height() < viewportHeight) {
-                $("#filler").append("<p class='loremipsum'>"+loremIpsum+"</p>")
-              }
-              $("h1").each(function() {
-                $("#toc").append("<p><a href='#"+$(this).parent().attr('id')+"'>"+$(this).text()+"</a></p>")
+          var start = $("#block-body-6").offset().top-$("#sidebar").offset().top
+          var stop  = start+$("#block-body-6").outerHeight()-20
+          for (t = start; t < stop; t+=80) {
+            $("<div class='obscured obstacle'>Obscured</div>")
+              .insertBefore("#toc-wrapper")
+              .css({
+                top: t,
+                left: 5,
+                backgroundColor: '#800',
+                'box-shadow' : "3px 3px 5px rgba(136,68,68,0.5)"
               })
-              $("#toc").fadeIn(self)
-              break
-            case 9:
-              var contentHeight = 
-                $("#content > div:last-child").position().top+
-                $("#content > div:last-child").outerHeight()
-              $("#page-width").css("height","auto")
-              $("#content, #sidebar")
-                .css("height",contentHeight)
-              $("#page")
-                .animate({"height": contentHeight+"px"}
-                  ,self)
-              break
-            default:
-              $("#sticker1").stick($("#base1"))
-              $("#sticker2").stick($("#base2"))
-              $("#block-meta-0").stick($("#block-body-0")) 
-              $("#block-meta-1").stick($("#block-body-1")) 
-              $("#block-meta-2").stick($("#block-body-2")) 
-              $("#block-meta-3").stick($("#block-body-3")) 
-              $("#block-meta-4").stick($("#block-body-4")) 
-              $("#block-meta-5").stick($("#block-body-5")) 
-              $("#block-meta-6").stick($("#block-body-6")) 
-              $("#toc").stick($("#content"))
-              return;
-            }
+              .show()
+            $("<div class='obstacle'>Obscures</div>")
+              .insertAfter("#toc-wrapper")
+              .css({
+                top: t+40, 
+                right: 5, 
+                'box-shadow' : "10px 10px 5px rgba(136,68,68,0.5)"
+              })
+              .show()
           }
-          animate()
+          $(window).bind('scroll hashchange', $(".obstacle"), function(event) {
+            event.data.each(function() {
+              var factor = ($(this).offset().top - $(window).scrollTop() - $(window).height()*0.25) / ($(window).height()*0.5);
+              if (factor < 0) factor = 0
+              else if (factor > 1) factor = 1
+              if ($(this).hasClass('obscured'))
+                $(this).css('left', 5-$(this).outerWidth()*factor)
+              else
+                $(this).css('right', 5-$(this).outerWidth()*factor)
+            });
+          });
+          $("#filler").show()
+          while ($("#filler").height() < viewportHeight) {
+            $("#filler").append("<p class='loremipsum'>"+loremIpsum+"</p>")
+          }
+          
+          // This is a workaround - when the TOC becomes absolutely positioned,
+          // it disappears because the sidebar has overflow: hidden.
+          $("#toc-wrapper").height($("#toc-wrapper").height())
+
+          // The above workaround is in fact not necessary, as we have 
+          // to enlarge the sidebar anyway as to make the "obstacle" bars visible.
+          $("#sidebar").height($("#content").height())
+
+          $("#sticker1").stick($("#base1"))
+          $("#sticker2").stick($("#base2"))
+          $("#block-meta-0").stick($("#block-body-0")) 
+          $("#block-meta-1").stick($("#block-body-1")) 
+          $("#block-meta-2").stick($("#block-body-2")) 
+          $("#block-meta-3").stick($("#block-body-3")) 
+          $("#block-meta-4").stick($("#block-body-4")) 
+          $("#block-meta-5").stick($("#block-body-5")) 
+          $("#block-meta-6").stick($("#block-body-6")) 
+          $("#toc").stick($("#content"))
+
         })
       //-->
     </script>
