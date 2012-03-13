@@ -360,19 +360,21 @@
               </div>
               <p>
                 or across the page content, e.g. main menu bar placed below some graphic.
-                (In the latter case, you must ensure that other elements do not change 
-                positions when the sticker element is removed from normal flow.)
               </p>
               <div class="spaceafter" style="display: block">
-                <div class="sample-sticker" id="sticker2" style="float: left; width: 100%; display: block; padding-right: 2px; margin-bottom: -52px;">
-                  <div style="height: 50px; display: block; border: 1px dotted red; background: rgba(255,255,255,0.9); z-index: 1">
-                    float: left; width: 100%; height: 50px;
+                <div class="sample-sticker" id="sticker2" style="margin-bottom: 10px">
+                  <div style="height: 50px; border: 1px dotted red; background: rgba(255,255,255,0.9); z-index: 1">
+                    height: 50px; z-index: 10000;
                   </div>
                 </div>
-                <div class="sample-base" id="base2" style="height: 200px; display: block; position: relative; top: 60px; margin-bottom: 60px; border: 1px dotted black">
+                <div class="sample-base" id="base2" style="height: 200px; display: block; border: 1px dotted black">
                   position: relative; top: 60px; margin-bottom: 60px;
                 </div>
               </div>
+
+                (In the latter case, you must ensure that other elements do not change 
+                positions when the sticker element is removed from normal flow.)
+
               <p>
                 Assuming for simplicity that the top margin of 
                 the base element is zero, here is how you can control 
@@ -493,7 +495,26 @@
               <p>
                 If there are any other elements in the slip area, 
                 they will obscure or be obsured by the sticker. Make sure to clear
-                that area or use z-index appropriately.
+                that area or use <code>z-index</code> appropriately.
+              </p>
+            </div>
+          </div>
+          <div class="block">
+            <div class="block-header" id="block-header-7">
+              <h1>Automatic Placeholders</h1>
+            </div>
+            <div class="block-body" id="block-body-7">
+<pre><code>#sticker7 {
+}</code></pre>
+              <p id="sticker7">
+                A sticker element may initially be part of normal page flow
+                (that is, it may have <code>static</code> or <code>relative</code>
+                position.) When its position is then changed to <code>fixed</code>
+                or <code>absolute</code>, the browser could have reflown other 
+                elements. To prevent this from happening, the plugin wraps 
+                such sticker elements into a transparent <code>&lt;div&gt;</code> 
+                element of exactly the same size. 
+                For instance, this paragraph is a sticker.
               </p>
             </div>
           </div>
@@ -525,7 +546,7 @@
       </div>
     </div>
     <script type="text/javascript" src="jquery-1.6.1.min.js"></script>
-    <script type="text/javascript" src="jquery.stickers.min.js"></script>
+    <script type="text/javascript" src="jquery.stickers.js"></script>
     <script type="text/javascript">
       <!--
         $(document).ready(function() {
@@ -567,7 +588,8 @@
                 top: t,
                 left: 5,
                 backgroundColor: '#800',
-                'box-shadow' : "3px 3px 5px rgba(136,68,68,0.5)"
+                'box-shadow' : '3px 3px 5px rgba(136,68,68,0.5)',
+                'text-align' : 'right'
               })
               .show()
             $("<div class='obstacle'>Obscures</div>")
@@ -575,7 +597,7 @@
               .css({
                 top: t+40, 
                 right: 5, 
-                'box-shadow' : "10px 10px 5px rgba(136,68,68,0.5)"
+                'box-shadow' : '10px 10px 5px rgba(136,68,68,0.5)'
               })
               .show()
           }
@@ -612,6 +634,8 @@
           $("#block-meta-4").stick($("#block-body-4")) 
           $("#block-meta-5").stick($("#block-body-5")) 
           $("#block-meta-6").stick($("#block-body-6")) 
+          $("#block-meta-7").stick($("#block-body-7")) 
+          $("#sticker7").stick($("#block-body-7")) 
           $("#toc").stick($("#content"))
 
         })

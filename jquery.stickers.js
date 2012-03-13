@@ -1,3 +1,13 @@
+/**
+ * jQuery Stick-Slip v0.9
+ * Temporarily stick an element to the viewport as the page is scrolled
+ * Takes no parameters, fully controlled by layout.
+ * https://github.com/dmitryleskov/jquery-stick-slip
+ *
+ * Licensed under the MIT license.
+ * Copyright 2011-2012 Dmitry Leskov.
+ */
+ 
 if (typeof DEBUG === 'undefined') {
     DEBUG = true
 } else {
@@ -59,9 +69,11 @@ function log(s) {
                 }
             } else if (scroll <= data.slipMin) {
                 data.absolute.top = data.posMin;
+                DEBUG && log($this.attr("id")+":data.absolute.top="+data.absolute.top)
                 $this.css(data.absolute);
             } else if (scroll >= data.slipMax) {
                 data.absolute.top = data.posMin+data.slipMax-data.slipMin;
+                DEBUG && log($this.attr("id")+":data.absolute.top="+data.absolute.top)
                 $this.css(data.absolute);
             }
         }
@@ -80,7 +92,43 @@ function log(s) {
                             +" $this.height()="+$this.height()
                             +" $this.outerHeight()="+$this.outerHeight()
                             +" $this.offsetParent().offset().top="+$this.offsetParent().offset().top
-                            +" $this.css('margin-top')="+$this.css('margin-top'))
+                            +" $this.css('margin-top')="+$this.css('margin-top')
+                            +" $this.css('float')="+$this.css('float'))
+
+                if (($this.css('position') == 'static' ||
+                     $this.css('position') == 'relative') &&
+                     $this.css('float') == 'none') {
+                    // Create a placeholder <div> so that other elements
+                    // do not move when the sticker is removed from normal flow.
+                    $this.wrap("<div />")
+
+                    // The placeholder must occupy exactly the same space and 
+                    // position as the sticker. Their vertical margins collapse, 
+                    // but horizontal don't. Therefore:
+                    //
+                    //   - The width of the placeholder is set equal to the width 
+                    //     of the sticker's _margin_ box, and the horizontal margins 
+                    //     of the placeholder are set to zero.
+                    //
+                    //   - The height of the placeholder is set equal to the height
+                    //     of the sticker's _border_ box, and the vertical margins 
+                    //     of the placeholder are copied from the sticker.
+                    //
+                    $this.parent()
+                        .width($this.outerWidth(true))
+                        .height($this.outerHeight())
+                        .css({
+                            'border': '0',
+                            'padding': '0',
+                            'marginTop': $this.css('marginTop'),
+                            'marginBottom': $this.css('marginBottom'),
+                            'marginRight': 0,
+                            'marginLeft': 0,
+                            'background-color': 'transparent',
+                            'overflow': 'visible'
+                        })
+                }
+
                 var slipMin = $this.offsetParent().offset().top+$this.position().top
                 var slipMax = slipMin+base.outerHeight()-$this.outerHeight()-($this.offset().top-base.offset().top)
 //                var slipMax = slipMin+base.outerHeight()-$this.outerHeight()+(base.offset().top-$this.offset().top)*2
@@ -90,18 +138,20 @@ function log(s) {
                     slipMax: slipMax,
                     posMin: $this.position().top,
                     topMargin: parseFloat($this.css('margin-top').replace("px", "")),
-                    absolute: { top: $this.position().top, 
-                                width: $this.width(),
-                                height: $this.height(),
-                                position: 'absolute'},
-                    fixed: { top: 0, 
-                             width: $this.width(),
-                             height: $this.height(),
-                             position: 'fixed' }
+                    absolute: { 
+                       top: $this.position().top, 
+                       width: $this.width(),
+                       height: $this.height(),
+                       position: 'absolute'},
+                    fixed: { 
+                       top: 0, 
+                       width: $this.width(),
+                       height: $this.height(),
+                       position: 'fixed' }
                 })
             }
-            stick.call(this);
-        });
+            stick.call(this)
+        })
 
         $(window).bind('scroll hashchange', stickers, function(event) {
             event.data.each(stick)
